@@ -39,7 +39,6 @@ public class BinaryTree {
     // Return a list of all data within the leaves of the tree
     public ArrayList<String> leafData()  {
         ArrayList<String>	result = new ArrayList<String>();
-
         if (data != null) {
             if ((leftChild.data == null) && (rightChild.data == null))
                 result.add(data);
@@ -62,14 +61,48 @@ public class BinaryTree {
 
 
     public boolean contains(String d) {
-        return false;  // replace this code with your own
+
+        if (data == null) {
+            return false;
+        }
+
+        if (d.equals(data)) {
+            return true;
+        }
+
+        return leftChild.contains(d) || rightChild.contains(d);
     }
 
     public boolean isTheSameAs(BinaryTree t) {
-        return false;  // replace this code with your own
+        if (this.data == null && t.data == null){
+            return true;
+        }
+        if (this.data == null || t.data == null){
+            return false;
+        }
+
+        return leftChild.isTheSameAs(t.leftChild) && rightChild.isTheSameAs(t.rightChild) && this.data.equals(t.data);
+
     }
 
     public boolean isSymmetric() {
-        return false;  // replace this code with your own
+        if (this.data == null){
+            return true;
+        }
+
+        return isSymmetric(this.leftChild, this.rightChild);
+    }
+
+    // All logic is encapsulated in a single method
+    private boolean isSymmetric(BinaryTree left, BinaryTree right) {
+        if (left.data == null && right.data == null) {
+            return true;
+        }
+        if (left.data == null || right.data == null) {
+            return false;
+        }
+        return isSymmetric(left.leftChild,right.rightChild) && isSymmetric(right.leftChild,left.rightChild) && left.data.equals(right.data);
     }
 }
+
+

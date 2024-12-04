@@ -141,6 +141,24 @@ public class LinkedList {
     }
 
     public boolean isInIncreasingOrder() {
-        return false;  // replace this code with your own
+        if (head == null || head.next == null){
+            return true;
+        }
+        return isInIncreasingOrder(head);
+    }
+
+    public boolean isInIncreasingOrder(Item i){
+        if (i.next == null){
+            return true;
+        }
+
+        if (i.data > i.next.data){
+            return false;
+        }
+
+        else {
+            return isInIncreasingOrder(i.next);
+        }
+
     }
 }
